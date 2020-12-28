@@ -5,13 +5,13 @@ on:
     branches: [ master ]
     paths:
       - '.github/workflows/r1s_lean_h3.yml'
-      
+
 jobs:
 
   build:
 
     runs-on: ubuntu-latest
-    if: github.repository == 'klever1988/nanopi-openwrt'
+    if: github.repository == 'fogeater/nanopi-openwrt'
 
     steps:
 
