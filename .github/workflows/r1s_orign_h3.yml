@@ -1,0 +1,71 @@
+#
+# This is free software, lisence use MIT.
+# 
+# Copyright (C) 2019 Jolly <https://totoro.site>
+# 
+# <https://github.com/skytotwo/NanoPi-R1S-Build-By-Actions>
+#
+# Write by Jolly 2019/12/7
+# last update at 2019/12/19
+
+name: NanoPi-R1s H3 OpenWrt 19.07 Build
+
+on:
+  push:
+    branches: 
+      - master
+  # schedule:
+  #   - cron: 0 20 * * *
+  # release:
+  #   types: [published]
+
+jobs:
+
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+
+      - name: Checkout
+        uses: actions/checkout@master
+        with:
+          ref: master
+
+      - name: Initialization Environment
+        env:
+          DEBIAN_FRONTEND: noninteractive
+        run: |
+          wget -O - https://raw.githubusercontent.com/friendlyarm/build-env-on-ubuntu-bionic/master/install.sh | bash         
+          
+      - name: Install Repo
+        run: |
+          git clone https://github.com/friendlyarm/repo
+          sudo cp repo/repo /usr/bin/
+          
+      - name: Download Source
+        run: |
+          mkdir friendlywrt-h3
+          cd friendlywrt-h3
+          repo init -u https://github.com/friendlyarm/friendlywrt_manifests -b master-v19.07.1 -m h3.xml --repo-url=https://github.com/friendlyarm/repo  --no-clone-bundle
+      
+      - name: Merge UpStearm OpenWrt
+        run: |
+          cd friendlywrt-h3
+          repo sync -c  --no-clone-bundle
+      
+      - name: Build OpenWrt
+        run: |
+          cd friendlywrt-h3
+          ./build.sh nanopi_r1s_h3.mk
+          
+      - name: Assemble Artifact
+        run: |
+          rm -rf ./artifact/
+          mkdir -p ./artifact/
+          find friendlywrt-h3/out/ -name "FriendlyWrt_*img.zip*" | xargs -i mv -f {} ./artifact/
+      - name: Upload Artifact
+        uses: actions/upload-artifact@master
+        with:
+          name: FriendlyWrt_NanoPi-R1S H3 v19.07
+          path: ./artifact/
