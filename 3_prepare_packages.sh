@@ -15,17 +15,18 @@ rm -rf luci-theme-edge/ && git clone -b 18.06 https://github.com/garypang13/luci
 rm -rf luci-theme-infinityfreedom/ && git clone https://github.com/xiaoqingfengATGH/luci-theme-infinityfreedom
 rm -rf luci-app-chinadns-ng/ && git clone https://github.com/WuSiYu/luci-app-chinadns-ng
 rm -rf openwrt-chinadns-ng/ && git clone https://github.com/pexcn/openwrt-chinadns-ng
+rm -rf v2ray-core/ && git clone https://github.com/kuoruan/openwrt-v2ray
+
+git clone https://git.fengqi.me/openwrt-project/luci-app-passwall
+
+git clone https://github.com/jerrykuku/lua-maxminddb.git
+git clone https://github.com/jerrykuku/luci-app-vssr.git
+cd luci-app-vssr/root/etc/
+echo 'china_ssr.txt
+config/black.list
+config/white.list
+dnsmasq.oversea/oversea_list.conf
+dnsmasq.ssr/ad.conf
+dnsmasq.ssr/gfw_base.conf
+dnsmasq.ssr/gfw_list.conf' | xargs rm
 cd ../../
-
-
-#git clone https://github.com/jerrykuku/lua-maxminddb.git
-#git clone https://github.com/jerrykuku/luci-app-vssr.git
-#cd luci-app-vssr/root/etc/
-#echo 'china_ssr.txt
-#config/black.list
-#config/white.list
-#dnsmasq.oversea/oversea_list.conf
-#dnsmasq.ssr/ad.conf
-#dnsmasq.ssr/gfw_base.conf
-#dnsmasq.ssr/gfw_list.conf' | xargs rm
-#cd ../../../
