@@ -17,7 +17,7 @@ rm -rf luci-app-chinadns-ng/ && git clone https://github.com/WuSiYu/luci-app-chi
 rm -rf openwrt-chinadns-ng/ && git clone https://github.com/pexcn/openwrt-chinadns-ng
 rm -rf v2ray-core/ && git clone https://github.com/kuoruan/openwrt-v2ray
 
-git clone https://git.fengqi.me/openwrt-project/luci-app-passwall
+git clone https://github.com/xiaorouji/openwrt-passwall.git
 
 git clone https://github.com/jerrykuku/lua-maxminddb.git
 git clone https://github.com/jerrykuku/luci-app-vssr.git
